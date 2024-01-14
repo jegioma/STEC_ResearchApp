@@ -1,0 +1,28 @@
+<header class="full-header">
+  <div class="container">
+    <div class="header-brand">
+      <img src="../assets/images/ggcLogo.png" alt="GGC Logo">
+      <div class="title">STEC ResearchApp</div>
+    </div>
+    <nav class="header-nav">
+      <button class="nav-button" (click)="onClick()">{{ buttonName }}</button>
+      <div class="dropdown">
+        <button class="btn btn-secondary dropdown-toggle nav-button" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+          Quick Links
+        </button>
+        <ul class="dropdown-menu">
+          <li><a class="dropdown-item" routerLink="/faq">FAQs</a></li>
+          <li><a class="dropdown-item" routerLink="/enrollment">Enrollment Instructions</a></li>
+          <li><a class="dropdown-item" routerLink="/class-requirements">Class Requirements</a></li>
+          <li><a class="dropdown-item"
+              onclick="window.open('https://www.ggc.edu/academics/school-of-science-and-technology/research-internships-service-learning/stec-2500-4500/')">STEC Resources</a>
+          </li>
+          <li><a class="dropdown-item" onclick="window.open('https://www.ggc.edu/academics/calendar/')">Academic Calendar</a></li>
+          <li><a class="dropdown-item" routerLink="/previous-projects">Previous Projects</a></li>
+          <li><a class="dropdown-item" onclick="window.open('https://www.ggc.edu/academics/catalog/')">GGC Catalog</a></li>
+        </ul>
+      </div>
+      <button class="nav-button" routerLink="/landing">Home</button>
+    </nav>
+  </div>
+</header>

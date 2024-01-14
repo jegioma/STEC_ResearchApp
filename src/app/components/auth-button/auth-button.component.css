@@ -1,0 +1,13 @@
+/* AUTH BUTTON STYLES */
+
+.btn {
+  background-color: #036A41;
+  color: white;
+  border: black solid 3px;
+  display: inline-block;
+  border: none;
+  padding: 10px 20px;
+  margin: 5px;
+  border-radius: 5px;
+  cursor: pointer;
+}

@@ -1,0 +1,60 @@
+<div class="register-page">
+  <main class="register-content">
+    <div class="register-panel" *ngIf="!isSignedIn">
+      <h1 class="text-center mb-3">Register</h1>
+      <form class="mb-5">
+        <label for="validateStudentID" class="form-label">Student ID</label>
+        <div class="input-group mb-2">
+          <span class="input-group-text"><i class="bi bi-file-person"></i></span>
+          <input type="text" class="form-control" #studentIDSignUp class="form-control" placeholder="900..." required>
+          <div class="valid-feedback">Looks good!</div>
+        </div>
+        <label for="validateCustomFirstName" class="form-label">First Name</label>
+        <div class="input-group mb-2">
+          <span class="input-group-text"><i class="bi bi-type"></i></span>
+          <input type="text" class="form-control" id="validateCustomFirstName" placeholder="Type your first name"
+            required />
+          <div class="valid-feedback">Looks good!</div>
+        </div>
+        <label for="validateCustomLastName" class="form-label">Last Name</label>
+        <div class="input-group mb-2">
+          <span class="input-group-text"><i class="bi bi-type"></i></span>
+          <input type="text" class="form-control" id="validateCustomLastName" placeholder="Type your last name"
+            required />
+          <div class="valid-feedback">Looks good!</div>
+        </div>
+        <label for="validateEmail" class="form-label">Email</label>
+        <div class="input-group mb-2">
+          <span class="input-group-text"><i class="bi bi-envelope"></i></span>
+          <input type="email" #emailSignup class="form-control" id="validateEmail" placeholder="Type your email"
+            required />
+          <div class="valid-feedback">Looks good!</div>
+        </div>
+        <label for="validatePassword" class="form-label">Password</label>
+        <div class="input-group mb-2">
+          <span class="input-group-text"><i class="bi bi-lock"></i></span>
+          <input type="password" #passwordSignup class="form-control" id="validatePassword"
+            placeholder="Type your password" required />
+          <div class="valid-feedback">Looks good!</div>
+        </div>
+        <label for="validateRetypePassword" class="form-label">Retype Password</label>
+        <div class="input-group mb-5">
+          <span class="input-group-text"><i class="bi bi-lock"></i></span>
+          <input type="password" class="form-control" id="validateRetypePassword" placeholder="Retype Password"
+            required />
+          <div class="valid-feedback">Looks good!</div>
+        </div>
+        <div class="submit-register">
+          <button mdbRipple type="button" class="register-button register"
+            (click)="verifyEmail(studentIDSignUp.value, emailSignup.value, passwordSignup.value)">
+            Register
+          </button>
+        </div>
+      </form>
+      <div class="register-button-nav">
+        <button type="submit" class="register-button" (click)="backClick()">Back</button>
+      </div>
+    </div>
+  </main>
+</div>
+<app-feedback-button></app-feedback-button>

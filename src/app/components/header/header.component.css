@@ -1,0 +1,80 @@
+/* HEADER STYLING */
+
+.full-header {
+  background-color: white;
+  width: 100%;
+}
+
+.container {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.header-brand {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+}
+
+.header-brand img {
+  object-fit: cover;
+  object-position: center;
+  height: 6rem;
+  width: 14rem;
+  margin-right: 4rem;
+}
+
+.title {
+  font-size: 2.5rem;
+  font-weight: bold;
+}
+
+.header-nav {
+  display: flex;
+}
+
+.nav-button {
+  background-color: #036A41;
+  color: white;
+  border: black solid 4px;
+  border-radius: 10px;
+  padding: 5px;
+  margin: .5rem;
+  transition-duration: 0.4s;
+}
+
+.nav-button:hover {
+  background-color: #F4F4F3;
+  color: #036A41;
+  border: black solid 4px;
+  border-radius: 5px;
+}
+
+.dropdown {
+  content-visibility: hidden;
+}
+
+@media (max-width: 964px) {
+  .dropdown {
+    content-visibility: visible;
+  }
+}
+
+@media (max-width: 992px) {
+  .container {
+    flex-direction: column;
+  }
+}
+
+@media (max-width: 769px) {
+  .header-brand {
+    flex-direction: column;
+  }
+
+  .header-brand img {
+    margin-right: 0rem;
+  }
+}

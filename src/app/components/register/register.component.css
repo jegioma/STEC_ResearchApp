@@ -1,0 +1,44 @@
+/* REGISTER STYLES */
+
+.register-content {
+  background-color: #036A41;
+  height: 140vh;
+  display: flex;
+  justify-content: center;
+}
+
+.register-panel {
+  background-color: white;
+  border: black solid 4px;
+  max-height: 55rem;
+  margin: 2rem;
+  padding: 4rem 6rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.register-button {
+  background-color: #036A41;
+  color: white;
+  border: black solid 4px;
+  border-radius: 10px;
+  width: 6rem;
+  height: 3rem;
+  transition-duration: 0.4s;
+}
+
+.register-button:hover {
+  background-color: #F4F4F3;
+  color: #036A41;
+  border-radius: 5px;
+}
+
+.submit-register {
+  display: flex;
+  justify-content: center;
+}
+
+.register-button-nav {
+  display: flex;
+  justify-content: center;
+}

@@ -1,0 +1,82 @@
+/* ADMIN PAGE STYLES */
+
+.admin-page {
+  background-color: #036A41;
+  display: grid;
+  row-gap: 20px;
+  padding: 20px;
+  height: 100%;
+}
+
+.admin-content {
+  background-color: white;
+  border: black solid 4px;
+  padding-bottom: 2rem;
+}
+
+.admin-header {
+  margin: 1rem 4rem;
+}
+
+.admin-instructions {
+  margin: 1rem 4rem;
+}
+
+.form-manager {
+  margin: 0 4rem;
+}
+
+/* LINKS PANEL STYLES */
+
+.long-links-panel {
+  background-color: white;
+  border: black solid 4px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+/* QUICK LINKS STYLES */
+
+.link-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+}
+
+.link-buttons .button {
+  background-color: #036A41;
+  color: white;
+  border: black solid 4px;
+  border-radius: 10px;
+  margin: .5rem;
+  padding: 5px;
+  transition-duration: 0.4s;
+}
+
+.link-buttons .button:hover {
+  background-color: #F4F4F3;
+  color: #036A41;
+  border-radius: 5px;
+}
+
+/* CONTACT US STYLES */
+
+.contact-us {
+  text-align: center;
+}
+
+.contact-info address a  {
+  color: #036A41;
+  text-decoration: none;
+  transition-duration: 0.4s;
+}
+
+.contact-info address a:hover  {
+  text-decoration: underline;
+}
+
+@media (max-width: 992px) {
+  .form-manager {
+    margin: 0 2rem;
+  }
+}

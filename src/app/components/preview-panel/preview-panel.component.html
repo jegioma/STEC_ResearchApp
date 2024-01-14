@@ -1,0 +1,590 @@
+<p style="text-align: right; margin-right: 20%; font-size: 0.75em;">Select "All Advisors" to refresh list</p>
+<div class="filter-nav">
+  <select class="form-select" #filter name="list" (change)="filterSelect(filter.value)">
+    <option value="all" default>All Forms</option>
+    <option value="pending">Pending</option>
+    <option value="approved">Approved</option>
+    <option value="denied">Denied</option>
+  </select>
+  <select class="form-select" #faculty (change)="filterName(faculty.value)" name="faculty" ngModel required>
+    <option value="">Any Advisor</option>
+    <option *ngFor="let name of (namesArray$ | async)" [value]="name">{{name}}</option>
+  </select>
+</div>
+
+<div class="form-panel">
+  <h5>Forms 2500
+    <a class="secondary-content">
+      <i *ngIf="hide2500Form" (click)="hide2500Form = false" class="bi-caret-down-fill" style="font-size: 0.8em;"></i>
+      <i *ngIf="!hide2500Form" (click)="hide2500Form = true" class="bi-caret-up-fill" style="font-size: 0.8em;"></i>
+    </a>
+  </h5>
+  <ng-container *ngIf="!hide2500Form">
+    <div *ngIf="(forms2500$ | async)?.length! > 0;else noForms">
+      <ul *ngFor="let form of (forms2500$ | async)" class="collection">
+        <li class="collection-item" style="list-style: none">
+          <strong>Form:</strong> {{form.formNumber}}&nbsp;&nbsp;&nbsp;
+          <strong>Name:</strong> {{form.studentName}}&nbsp;&nbsp;&nbsp;
+          <strong>Semester:</strong> {{form.semester}}&nbsp;&nbsp;&nbsp;
+          <strong>Primary Advisor:</strong> {{form.primaryAdvisor}}
+          <a class="secondary-content">
+            <i (click)="editForm($event, form)" class="bi-pencil-fill" style="font-size: 0.9em;"></i>
+            <i *ngIf="editState && formToEdit!.id == form.id" (click)="clearState()" class="bi bi-x-square-fill"
+              style="font-size: 0.9em;"></i>
+          </a>
+          <div class="forms" *ngIf="editState && formToEdit!.id == form.id">
+            <form class="show-form" (ngSubmit)="updateForm(form)">
+              <div class="form-group">
+                <p>
+                  <label for="studentName"><b> Student Researcher Name:</b> </label>
+                  <input type="text" rows="1" cols="40" name="studentName" class="form-control"
+                    [(ngModel)]="form.studentName" />
+                </p>
+              </div>
+
+              <div class="form-row">
+                <div class="col">
+                  <label for="studentId"><b>Student ID #:</b></label>
+                  <input name="studentId" class="form-control" [(ngModel)]="form.studentId" />
+                </div>
+                <div class="col">
+                  <label for="studentEmail"><b> Student email:</b></label>
+                  <input name="studentEmail" class="form-control" [(ngModel)]="form.studentEmail" />
+                </div>
+              </div>
+
+              <p>
+                <label for="primaryAdvisor"><b>Primary Faculty Research Advisor:</b></label>
+                <input rows="1" cols="40" name="primaryAdvisor" class="form-control"
+                  [(ngModel)]="form.primaryAdvisor" />
+              </p>
+
+              <p>
+                <label for="primaryAdvisorEmail"><b>Primary Faculty Research Advisor Email:</b></label>
+                <input rows="1" cols="40" name="primaryAdvisorEmail" class="form-control"
+                  [(ngModel)]="form.primaryAdvisorEmail" />
+              </p>
+
+              <p>
+                <b> Additional Faculty Research Advisor Names:</b>
+              </p>
+              <div class="form-group">
+                <ol>
+                  <li><input name="addAdvisorOne" class="form-control" [(ngModel)]="form.addAdvisorOne" /></li>
+                  <li>
+                    <input rows="1" cols="92" name="addAdvisorTwo" class="form-control"
+                      [(ngModel)]="form.addAdvisorTwo" />
+                  </li>
+                  <li>
+                    <input rows="1" cols="92" name="addAdvisorThree" class="form-control"
+                      [(ngModel)]="form.addAdvisorThree" />
+                  </li>
+                  <li>
+                    <input rows="1" cols="92" name="addAdvisorFour" class="form-control"
+                      [(ngModel)]="form.addAdvisorFour" />
+                  </li>
+                </ol>
+              </div>
+              <div class="form-group">
+                <label for="researchProjectTitle"><b> Research Project Title:</b></label>
+                <input class="form-control" name="researchProjectTitle" [(ngModel)]="form.researchProjectTitle" />
+              </div>
+              <div class="form-group">
+                <label for="researchProjectDescription">
+                  <b> Research Project Description:</b>
+                </label>
+                <textarea class="form-control" name="researchProjectDescription"
+                  [(ngModel)]="form.researchProjectDescription"></textarea>
+              </div>
+              <div class="form-group">
+                <label for="researchProjectObjective">
+                  <b> Research Project Objectives:</b>
+                </label>
+
+                <textarea class="form-control" name="researchProjectObjective"
+                  [(ngModel)]="form.researchProjectObjective">
+                        </textarea>
+              </div>
+              <div class="form-group">
+                <p>
+                  <b>
+                    Additional Information
+                  </b>
+                </p>
+
+                <ol>
+                  <li>
+                    Indicate the number of credit hours for which the student is already
+                    registered, not including STEC2500:
+                    <input class="col-xs-1" name="numCreditHours" [(ngModel)]="form.numCreditHours" />
+                  </li>
+                  <br />
+
+                  <li>
+                    The student and the faculty advisor understand that if an incomplete
+                    is awarded, the ncomplete will automatically be converted to an F if a
+                    grade change form is not processed by the end of the next semester,
+                    including summer semester.
+                    <input class="form-check-input" type="radio" name="test1" value="yes" [checked]="true"
+                      [(ngModel)]="form.test1" /> Yes
+                    <input class="form-check-input" type="radio" name="test1" value="no" [checked]="true"
+                      [(ngModel)]="form.test1" /> No
+                  </li>
+                  <br />
+
+                  <li>
+                    The STEC 2500 project may be, but is not required to continue, for a
+                    second semester of credit if both the student and the faculty advisor
+                    are in agreement to add to the project. The continuation of the effort
+                    is not equivalent to an incomplete, but is intended to expand the
+                    investigation from the previous results.
+                    <input class="form-check-input" type="radio" name="test2" value="yes" [checked]="true"
+                      [(ngModel)]="form.test2" /> Yes
+                    <input class="form-check-input" type="radio" name="test2" value="no" [checked]="true"
+                      [(ngModel)]="form.test2" /> No
+                  </li>
+                  <br />
+                </ol>
+                <div class="form-group row">
+                  <div class="col">
+                    <label for="studentSignature">
+                      <b> Student Researcher </b>
+                    </label>
+                    <input class="form-control" name="studentSignature" [(ngModel)]="form.studentSignature" disabled />
+                    <label for="studentDate">Date:</label>
+                    <input class="form-control" name="studentDateSigned" [(ngModel)]="form.studentDateSigned" disabled>
+                  </div>
+                  <div class="col">
+                    <label for="advisorSignature">
+                      <b>Faculty Research Advisor</b>
+                    </label>
+                    <input class="form-control" name="facultySignature" [(ngModel)]="form.facultySignature" disabled />
+                    <label for="advisorDate">Date:</label>
+                    <input class="form-control" name="facultyDateSigned" [(ngModel)]="form.facultyDateSigned"
+                      disabled />
+                  </div>
+                </div>
+              </div>
+              <br>
+              <ng-container class="approved" *ngIf="form.approved">
+                <button (click)="unapproveForm($event, form)" type="button" class="form-button">Unapprove</button>
+                <button (click)="deleteForm($event, form)" type="button" class="form-button">Delete</button>
+              </ng-container>
+              <ng-container class="not-approved" *ngIf="!form.approved && !form.denied">
+                <button (click)="approveForm($event, form)" type="button" class="form-button">Approve</button>
+                <button (click)="deniedForm($event, form)" type="button" class="form-button">Deny</button>
+                <button (click)="copyKey($event, form)" type="button" class="form-button">Copy Key</button>
+              </ng-container>
+              <ng-container class="denied" *ngIf="form.denied">
+                <button (click)="approveForm($event, form)" type="button" class="form-button">Approve</button>
+                <button (click)="deleteForm($event, form)" type="button" class="form-button">Delete</button>
+              </ng-container>
+              <button type="submit" class="form-button">Update</button>
+            </form>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </ng-container>
+
+
+  <h5>Forms 4200
+    <a class="secondary-content">
+      <i *ngIf="hide4200Form" (click)="hide4200Form = false" class="bi-caret-down-fill" style="font-size: 0.8em;"></i>
+      <i *ngIf="!hide4200Form" (click)="hide4200Form = true" class="bi-caret-up-fill" style="font-size: 0.8em;"></i>
+    </a>
+  </h5>
+  <ng-container *ngIf="!hide4200Form">
+    <div *ngIf="(forms4200$ | async)?.length! > 0;else noForms">
+      <ul *ngFor="let form of (forms4200$ | async)" class="collection">
+        <li class="collection-item" style="list-style: none">
+          <strong>Form:</strong> {{form.formNumber}}&nbsp;&nbsp;&nbsp;
+          <strong>Name:</strong> {{form.studentName}}&nbsp;&nbsp;&nbsp;
+          <strong>Semester:</strong> {{form.semester}}&nbsp;&nbsp;&nbsp;
+          <strong>Primary Advisor:</strong> {{form.primaryAdvisor}}
+          <a class="secondary-content">
+            <i (click)="editForm($event, form)" class="bi-pencil-fill" style="font-size: 0.9em;"></i>
+            <i *ngIf="editState && formToEdit!.id == form.id" (click)="clearState()" class="bi bi-x-square-fill"
+              style="font-size: 0.9em;"></i>
+          </a>
+
+          <div class="forms" *ngIf="editState && formToEdit!.id == form.id">
+            <form class="show-form" (ngSubmit)="updateForm(form)">
+              <div class="form-group">
+                <p>
+                  <label for="studentName"><b> Student Researcher Name:</b> </label>
+                  <input type="text" rows="1" cols="40" name="studentName" class="form-control"
+                    [(ngModel)]="form.studentName" />
+                </p>
+              </div>
+
+              <div class="form-row">
+                <div class="col">
+                  <label for="studentId"><b>Student ID #:</b></label>
+                  <input name="studentId" class="form-control" [(ngModel)]="form.studentId" />
+                </div>
+                <div class="col">
+                  <label for="studentEmail"><b> Student email:</b></label>
+                  <input name="studentEmail" class="form-control" [(ngModel)]="form.studentEmail" />
+                </div>
+              </div>
+
+              <p>
+                <label for="primaryAdvisor"><b>Primary Faculty Research Advisor:</b></label>
+                <input rows="1" cols="40" name="primaryAdvisor" class="form-control"
+                  [(ngModel)]="form.primaryAdvisor" />
+              </p>
+
+              <p>
+                <label for="primaryAdvisorEmail"><b>Primary Faculty Research Advisor Email:</b></label>
+                <input rows="1" cols="40" name="primaryAdvisorEmail" class="form-control"
+                  [(ngModel)]="form.primaryAdvisorEmail" />
+              </p>
+
+              <p>
+                <b> Additional Faculty Research Advisor Names:</b>
+              </p>
+              <div class="form-group">
+                <ol>
+                  <li><input name="addAdvisorOne" class="form-control" [(ngModel)]="form.addAdvisorOne" /></li>
+                  <li>
+                    <input rows="1" cols="92" name="addAdvisorTwo" class="form-control"
+                      [(ngModel)]="form.addAdvisorTwo" />
+                  </li>
+                  <li>
+                    <input rows="1" cols="92" name="addAdvisorThree" class="form-control"
+                      [(ngModel)]="form.addAdvisorThree" />
+                  </li>
+                  <li>
+                    <input rows="1" cols="92" name="addAdvisorFour" class="form-control"
+                      [(ngModel)]="form.addAdvisorFour" />
+                  </li>
+                </ol>
+              </div>
+              <div class="form-group">
+                <label for="researchProjectTitle"><b> Research Project Title:</b></label>
+                <input class="form-control" name="researchProjectTitle" [(ngModel)]="form.researchProjectTitle" />
+              </div>
+              <div class="form-group">
+                <label for="researchProjectDescription"><b> Research Project Description:</b></label>
+                <textarea class="form-control" name="researchProjectDescription"
+                  [(ngModel)]="form.researchProjectDescription"></textarea>
+              </div>
+              <div class="form-group">
+                <label for="researchProjectObjective">
+                  <b> Research Project Objectives:</b>
+                </label>
+
+                <textarea class="form-control" name="researchProjectObjective"
+                  [(ngModel)]="form.researchProjectObjective">
+                      </textarea>
+              </div>
+              <div class="form-group">
+                <p>
+                  <b>
+                    Additional Information
+                  </b>
+                </p>
+
+                <ol>
+                  <li>
+                    The research student's Area F requriements been met.
+                    <input class="form-check-input" type="radio" name="areaF" value="yes" [checked]="true"
+                      [(ngModel)]="form.areaF" /> Yes
+                    <input class="form-check-input" type="radio" name="areaF" value="no" [checked]="true"
+                      [(ngModel)]="form.areaF" /> No
+                  </li>
+                  <textarea *ngIf="form.areaF == 'no'" class="form-control" name="areaF_reason"
+                    [(ngModel)]="form.areaF_reason" required>
+                        </textarea>
+                  (If not, you cannot enroll in STEC{{form.formNumber}} without additional approval.)<br />
+
+                  <li>
+                    Indicate the number of credit hours for which the student is already
+                    registered, not including STEC{{form.formNumber}}:
+                    <input class="col-xs-1" name="numCreditHours" [(ngModel)]="form.numCreditHours" />
+                  </li>
+                  <br />
+
+                  <li>
+                    The student and the faculty advisor understand that if an incomplete
+                    is awarded, the incomplete will automatically be converted to an F if a
+                    grade change form is not processed by the end of the next semester,
+                    including summer semester.
+                    <input class="form-check-input" type="radio" name="test1" value="yes" [checked]="true"
+                      [(ngModel)]="form.test1" /> Yes
+                    <input class="form-check-input" type="radio" name="test1" value="no" [checked]="true"
+                      [(ngModel)]="form.test1" /> No
+                  </li>
+                  <br />
+
+                  <li>
+                    The STEC {{form.formNumber}} project may be, but is not required to continue, for a
+                    second semester of credit if both the student and the faculty advisor
+                    are in agreement to add to the project. The continuation of the effort
+                    is not equivalent to an incomplete, but is intended to expand the
+                    investigation from the previous results.
+                    <input class="form-check-input" type="radio" name="test2" value="yes" [checked]="true"
+                      [(ngModel)]="form.test2" /> Yes
+                    <input class="form-check-input" type="radio" name="test2" value="no" [checked]="true"
+                      [(ngModel)]="form.test2" /> No
+                  </li>
+                  <br />
+
+                  <li>
+                    Is this course required to be compleeted this semester in order for
+                    the student to completed his/her graduation requirements?
+                    <input class="form-check-input" type="radio" name="test3" value="yes" [checked]="true"
+                      [(ngModel)]="form.test3" /> Yes
+                    <input class="form-check-input" type="radio" name="test3" value="no" [checked]="true"
+                      [(ngModel)]="form.test3" /> No
+                  </li>
+                  <br />
+                </ol>
+                <div class="form-group row">
+                  <div class="col">
+                    <label for="studentSignature">
+                      <b> Student Researcher </b>
+                    </label>
+                    <input class="form-control" name="studentSignature" [(ngModel)]=form.studentSignature disabled />
+                    <label for="studentDate">Date:</label>
+                    <input class="form-control" name="studentDateSigned" [(ngModel)]="form.studentDateSigned" disabled>
+                  </div>
+                  <div class="col">
+                    <label for="advisorSignature">
+                      <b>Faculty Research Advisor</b>
+                    </label>
+                    <input class="form-control" name="facultySignature" [(ngModel)]="form.facultySignature" disabled />
+                    <label for="advisorDate">Date:</label>
+                    <input class="form-control" name="facultyDateSigned" [(ngModel)]="form.facultyDateSigned"
+                      disabled />
+                  </div>
+                </div>
+              </div>
+              <br>
+              <ng-container class="approved" *ngIf="form.approved">
+                <button (click)="unapproveForm($event, form)" type="button" class="form-button">Unapprove</button>
+                <button (click)="deleteForm($event, form)" type="button" class="form-button">Delete</button>
+              </ng-container>
+              <ng-container class="not-approved" *ngIf="!form.approved && !form.denied">
+                <button (click)="approveForm($event, form)" type="button" class="form-button">Approve</button>
+                <button (click)="deniedForm($event, form)" type="button" class="form-button">Deny</button>
+                <button (click)="copyKey($event, form)" type="button" class="form-button">Copy Key</button>
+              </ng-container>
+              <ng-container class="denied" *ngIf="form.denied">
+                <button (click)="approveForm($event, form)" type="button" class="form-button">Approve</button>
+                <button (click)="deleteForm($event, form)" type="button" class="form-button">Delete</button>
+              </ng-container>
+              <button type="submit" class="form-button">Update</button>
+            </form>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </ng-container>
+
+
+  <h5>Forms 4500
+    <a class="secondary-content">
+      <i *ngIf="hide4500Form" (click)="hide4500Form = false" class="bi-caret-down-fill" style="font-size: 0.8em;"></i>
+      <i *ngIf="!hide4500Form" (click)="hide4500Form = true" class="bi-caret-up-fill" style="font-size: 0.8em;"></i>
+    </a>
+  </h5>
+  <ng-container *ngIf="!hide4500Form">
+    <div *ngIf="(forms4500$ | async)?.length! > 0;else noForms">
+      <ul *ngFor="let form of (forms4500$ | async)" class="collection">
+        <li class="collection-item" style="list-style: none">
+          <strong>Form:</strong> {{form.formNumber}}&nbsp;&nbsp;&nbsp;
+          <strong>Name:</strong> {{form.studentName}}&nbsp;&nbsp;&nbsp;
+          <strong>Semester:</strong> {{form.semester}}&nbsp;&nbsp;&nbsp;
+          <strong>Primary Advisor:</strong> {{form.primaryAdvisor}}
+          <a class="secondary-content">
+            <i (click)="editForm($event, form)" class="bi-pencil-fill" style="font-size: 0.9em;"></i>
+            <i *ngIf="editState && formToEdit!.id == form.id" (click)="clearState()" class="bi bi-x-square-fill"
+              style="font-size: 0.9em;"></i>
+          </a>
+
+          <div class="forms" *ngIf="editState && formToEdit!.id == form.id">
+            <form class="show-form" (ngSubmit)="updateForm(form)">
+              <div class="form-group">
+                <p>
+                  <label for="studentName"><b> Student Researcher Name:</b> </label>
+                  <input type="text" rows="1" cols="40" name="studentName" class="form-control"
+                    [(ngModel)]="form.studentName" />
+                </p>
+              </div>
+
+              <div class="form-row">
+                <div class="col">
+                  <label for="studentId"><b>Student ID #:</b></label>
+                  <input name="studentId" class="form-control" [(ngModel)]="form.studentId" />
+                </div>
+                <div class="col">
+                  <label for="studentEmail"><b> Student email:</b></label>
+                  <input name="studentEmail" class="form-control" [(ngModel)]="form.studentEmail" />
+                </div>
+              </div>
+
+              <p>
+                <label for="primaryAdvisor"><b>Primary Faculty Research Advisor:</b></label>
+                <input rows="1" cols="40" name="primaryAdvisor" class="form-control"
+                  [(ngModel)]="form.primaryAdvisor" />
+              </p>
+
+              <p>
+                <label for="primaryAdvisorEmail"><b>Primary Faculty Research Advisor Email:</b></label>
+                <input rows="1" cols="40" name="primaryAdvisorEmail" class="form-control"
+                  [(ngModel)]="form.primaryAdvisorEmail" />
+              </p>
+
+              <p>
+                <b> Additional Faculty Research Advisor Names:</b>
+              </p>
+              <div class="form-group">
+                <ol>
+                  <li><input name="addAdvisorOne" class="form-control" [(ngModel)]="form.addAdvisorOne" /></li>
+                  <li>
+                    <input rows="1" cols="92" name="addAdvisorTwo" class="form-control"
+                      [(ngModel)]="form.addAdvisorTwo" />
+                  </li>
+                  <li>
+                    <input rows="1" cols="92" name="addAdvisorThree" class="form-control"
+                      [(ngModel)]="form.addAdvisorThree" />
+                  </li>
+                  <li>
+                    <input rows="1" cols="92" name="addAdvisorFour" class="form-control"
+                      [(ngModel)]="form.addAdvisorFour" />
+                  </li>
+                </ol>
+              </div>
+              <div class="form-group">
+                <label for="researchProjectTitle"><b> Research Project Title:</b></label>
+                <input class="form-control" name="researchProjectTitle" [(ngModel)]="form.researchProjectTitle" />
+              </div>
+              <div class="form-group">
+                <label for="researchProjectDescription"><b> Research Project Description:</b></label>
+                <textarea class="form-control" name="researchProjectDescription"
+                  [(ngModel)]="form.researchProjectDescription"></textarea>
+              </div>
+              <div class="form-group">
+                <label for="researchProjectObjective">
+                  <b> Research Project Objectives:</b>
+                </label>
+
+                <textarea class="form-control" name="researchProjectObjective"
+                  [(ngModel)]="form.researchProjectObjective">
+                      </textarea>
+              </div>
+              <div class="form-group">
+                <p>
+                  <b>
+                    Additional Information
+                  </b>
+                </p>
+
+                <ol>
+                  <li>
+                    The research student's Area F requriements been met.
+                    <input class="form-check-input" type="radio" name="areaF" value="yes" [checked]="true"
+                      [(ngModel)]="form.areaF" /> Yes
+                    <input class="form-check-input" type="radio" name="areaF" value="no" [checked]="true"
+                      [(ngModel)]="form.areaF" /> No
+                    <textarea *ngIf="form.areaF == 'no'" class="form-control" name="areaF_reason"
+                      [(ngModel)]="form.areaF_reason" required>
+                          </textarea>
+                    (If not, you cannot enroll in STEC{{form.formNumber}} without additional approval.)
+                  </li>
+                  <br />
+
+                  <li>
+                    Indicate the number of credit hours for which the student is already
+                    registered, not including STEC{{form.formNumber}}:
+                    <input class="col-xs-1" name="numCreditHours" [(ngModel)]="form.numCreditHours" />
+                  </li>
+                  <br />
+
+                  <li>
+                    The student and the faculty advisor understand that if an incomplete
+                    is awarded, the incomplete will automatically be converted to an F if a
+                    grade change form is not processed by the end of the next semester,
+                    including summer semester.
+                    <input class="form-check-input" type="radio" name="test1" value="yes" [checked]="true"
+                      [(ngModel)]="form.test1" /> Yes
+                    <input class="form-check-input" type="radio" name="test1" value="no" [checked]="true"
+                      [(ngModel)]="form.test1" /> No
+                  </li>
+                  <br />
+
+                  <li>
+                    The STEC {{form.formNumber}} project may be, but is not required to continue, for a
+                    second semester of credit if both the student and the faculty advisor
+                    are in agreement to add to the project. The continuation of the effort
+                    is not equivalent to an incomplete, but is intended to expand the
+                    investigation from the previous results.
+                    <input class="form-check-input" type="radio" name="test2" value="yes" [checked]="true"
+                      [(ngModel)]="form.test2" /> Yes
+                    <input class="form-check-input" type="radio" name="test2" value="no" [checked]="true"
+                      [(ngModel)]="form.test2" /> No
+                  </li>
+                  <br />
+
+                  <li>
+                    Is this course required to be compleeted this semester in order for
+                    the student to completed his/her graduation requirements?
+                    <input class="form-check-input" type="radio" name="test3" value="yes" [checked]="true"
+                      [(ngModel)]="form.test3" /> Yes
+                    <input class="form-check-input" type="radio" name="test3" value="no" [checked]="true"
+                      [(ngModel)]="form.test3" /> No
+                  </li>
+                  <br />
+                </ol>
+                <div class="form-group row">
+                  <div class="col">
+                    <label for="studentSignature">
+                      <b> Student Researcher </b>
+                    </label>
+                    <input class="form-control" name="studentSignature" [(ngModel)]="form.studentSignature" disabled />
+                    <label for="studentDate">Date:</label>
+                    <input class="form-control" name="studentDateSigned" [(ngModel)]="form.studentDateSigned" disabled>
+                  </div>
+                  <div class="col">
+                    <label for="advisorSignature">
+                      <b>Faculty Research Advisor</b>
+                    </label>
+                    <input class="form-control" name="facultySignature" [(ngModel)]="form.facultySignature" disabled />
+                    <label for="advisorDate">Date:</label>
+                    <input class="form-control" name="facultyDateSigned" [(ngModel)]="form.facultyDateSigned"
+                      disabled />
+                  </div>
+                </div>
+              </div>
+              <br>
+              <ng-container class="approved" *ngIf="form.approved">
+                <button (click)="unapproveForm($event, form)" type="button" class="form-button">Unapprove</button>
+                <button (click)="deleteForm($event, form)" type="button" class="form-button">Delete</button>
+              </ng-container>
+              <ng-container class="not-approved" *ngIf="!form.approved && !form.denied">
+                <button (click)="approveForm($event, form)" type="button" class="form-button">Approve</button>
+                <button (click)="deniedForm($event, form)" type="button" class="form-button">Deny</button>
+                <button (click)="copyKey($event, form)" type="button" class="form-button">Copy Key</button>
+              </ng-container>
+              <ng-container class="denied" *ngIf="form.denied">
+                <button (click)="approveForm($event, form)" type="button" class="form-button">Approve</button>
+                <button (click)="deleteForm($event, form)" type="button" class="form-button">Delete</button>
+              </ng-container>
+              <button type="submit" class="form-button">Update</button>
+            </form>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </ng-container>
+
+
+  <ng-template #noForms>
+    <br>
+  </ng-template>
+</div>
+
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script src="https://www.w3schools.com/lib/w3.js"></script>

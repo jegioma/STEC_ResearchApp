@@ -1,0 +1,15 @@
+Use Cases
+As a User I need to be able to login and authenticate to access web app
+As a User, I need to add the hyperlink for the syllabus to be on the main page.
+As a User, I need to create an email to send to the Admin (Dr.Wendy).
+As a student I need to be able to browse the available research projects.
+As a student I need to be able to complete a form to submit for approval to Dr Wendy.
+Angular framework needs to created and current html/css files need to be integrated into the framework.
+As a User, I need to edit the 900 number on the html registration form.
+As a User, I need to remove the bottom information items on the signup form in html.
+As a User, I need to edit the STEC2500 in the html file for signup.
+As a professor I need to be able to add a resource project.
+As a professor I need to be able to add a resource project.
+the valid input.
+As an admin I need to have some sort of admin level access for application moderation.
+As a User, I need to create the connection from the Home Page to Faculty and Student page

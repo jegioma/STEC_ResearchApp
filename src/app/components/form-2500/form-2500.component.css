@@ -1,0 +1,81 @@
+/* FORM 2500 STYLES */
+
+Body {
+  background-color: darkgreen;
+  font-family: Calibri, Helvetica, sans-serif;
+}
+
+h1 {
+  color: white;
+  font-size: 60px;
+  text-align: center;
+}
+
+h2 {
+  color: white;
+  font-size: 40px;
+  text-align: center;
+}
+
+h3 {
+  color: black;
+  font-size: 40px;
+  text-align: center;
+}
+
+i {
+  font-size: 0.8em;
+}
+
+.submitbtn {
+  background-color: darkgreen;
+  color: white;
+  border: black solid 4px;
+  border-radius: 10px;
+  width: 130px;
+  height: 40px;
+  padding: 4px;
+  margin: 10px 0px;
+  cursor: pointer;
+}
+
+form {
+  border: #f1f1f1 solid 3px;
+}
+
+button:hover {
+  opacity: 0.7;
+}
+
+.savebtn {
+  background-color: darkgreen;
+  color: white;
+  border: #F0F8FF solid 4px;
+  width: auto;
+  float: right;
+  font-weight: 1000;
+  padding: 15px;
+  margin: 10px 0px;
+  border: none;
+  cursor: pointer;
+}
+
+
+.container {
+  background-color: #D3D3D3;
+  padding: 25px;
+}
+
+.required-text::after {
+  color: red;
+  content: "*";
+}
+
+.ng-valid[required],
+.ng-valid.required {
+  border-left: #42A948 solid 5px;
+}
+
+.ng-invalid:not(form) {
+  border-left: #a94442 solid 5px;
+}

@@ -1,0 +1,34 @@
+How to Download Mongo DB
+1.	Go onto your browser and clink on this link: Try MongoDB Products | MongoDB.
+2.	Choose which type of deployment: On-premises MongoDB locally and then choose the MongoDB Community Server.
+ 
+
+3.	Go to your downloads folder and double click on the .msi package.
+ 
+
+4.	Click the Next button to start installation
+
+ 
+
+
+5.	Check the Accept License Agreement and then select the Next button.
+ 
+
+6.	Select Complete 
+  
+
+
+
+
+7.	Select Run service as Network Service user” and note the directory for later use.
+  
+
+8.	Deselect MongoDB compass then click Next, because you can select install MongoDB Compass if it is required.
+ 
+
+
+9.	Click on the Install to begin installation.
+  
+
+10.	Click Finish to complete the installation.
+ 

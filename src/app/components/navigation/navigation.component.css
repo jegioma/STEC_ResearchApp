@@ -1,0 +1,17 @@
+/* NAVIGATION STYLES */
+
+.nav-button-form {
+  background-color: #036A41;
+  color: white;
+  border: black solid 4px;
+  border-radius: 10px;
+  margin: 0 .5rem;
+  padding: 5px;
+  transition-duration: 0.4s;
+}
+
+.nav-button-form:hover {
+  background-color: #F4F4F3;
+  color: #036A41;
+  border-radius: 5px;
+}

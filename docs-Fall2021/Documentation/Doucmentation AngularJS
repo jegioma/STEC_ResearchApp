@@ -1,0 +1,20 @@
+How to Install Angular JS
+1.	 Access the Windows Command Prompt and enter the following command:
+2.	 Type npm install -g @angular/cli
+3.	During the installation process, the system asks you if you would like to share usage data with the Angular Team. You are free to answer either Yes or No as it does not affect functionality.
+ 
+4.	Once all packages have been added, verify the installed version:
+5.	Type ng –version
+6.	The Angular CLI version is 10.0.8. or higher
+ 
+7.	Use the Angular CLI to start a new Angular project. It this example, the name of the project is kitchen-sink. You are free to use the name of your choice for your project name. Type the following command in your Windows Command Prompt:
+8.	Type new ng kitchen-sink
+9.	The system takes a few moments to create the project. Once it finishes, you see the “Packages installed successfully” message.
+ 
+10.	Access your project’s root folder (kitchen-sink in this example) from the Windows Command Prompt and enter the following command:
+11.	Type ng serve
+ 
+12.	Use any browser to access your Angular local development server on localhost:4200:
+http://localhost:4200/
+ 
+

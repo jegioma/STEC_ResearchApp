@@ -1,0 +1,44 @@
+/* LOGIN STYLES */
+
+.login-content {
+  background-color: #036A41;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+}
+
+.login-panel {
+  background-color: white;
+  border: black solid 4px;
+  max-height: 40rem;
+  margin: 2rem;
+  padding: 4rem 6rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.login-button {
+  background-color: #036A41;
+  color: white;
+  border: black solid 4px;
+  border-radius: 10px;
+  width: 6rem;
+  height: 3rem;
+  transition-duration: 0.4s;
+}
+
+.login-button:hover {
+  background-color: #F4F4F3;
+  color: #036A41;
+  border-radius: 5px;
+}
+
+.submit-login {
+  display: flex;
+  justify-content: center;
+}
+
+.login-button-nav {
+  display: flex;
+  justify-content: space-around;
+}

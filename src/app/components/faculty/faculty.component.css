@@ -1,0 +1,155 @@
+/* FACULTY STYLES */
+
+.faculty-page {
+  background-color: #036A41;
+  display: grid;
+  row-gap: 20px;
+  padding: 20px;
+  height: 100%;
+}
+
+.faculty-content {
+  background-color: white;
+  border: black solid 4px;
+  padding-bottom: 2rem;
+}
+
+.faculty-header {
+  margin: 1rem 4rem;
+}
+
+.faculty-instructions {
+  margin: 1rem 4rem;
+}
+
+/* FORM FINDER STYLES */
+
+.form-finder {
+  margin: 0 4rem;
+}
+
+.form-search-bar {
+  width: 20rem;
+  margin-bottom: 1rem;
+}
+
+/* CONTAINER STYLES */
+
+.container {
+  background-color: #FFFFFF;
+  border: #036A41 solid 5px;
+  width: 90%;
+  height: 100;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 5%;
+
+}
+
+/* STUDENT FORM STYLES */
+
+.forms {
+  width: 90%;
+  height: 80%;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 5%;
+}
+
+.form-button {
+  background-color: #036A41;
+  color: white;
+  font-size: 0.8em;
+  border-radius: 10px;
+  cursor: pointer;
+  padding: 10px;
+}
+
+button:hover {
+  opacity: 0.9;
+}
+
+.show-form {
+  background-color: #F4F4F3;
+  border: black solid 5px;
+  padding-bottom: 10px;
+  padding: 10px;
+  border-radius: 10px;
+  font-size: 1em;
+}
+
+ul {
+  border: black solid 1px;
+  display: block;
+  padding: 5px;
+  width: 100%;
+}
+
+.required-text::after {
+  color: red;
+  content: "*";
+}
+
+.ng-valid[required],
+.ng-valid.required {
+  border-left: #42A948 solid 5px;
+}
+
+.ng-invalid:not(form) {
+  border-left: #a94442 solid 5px;
+}
+
+/* LINKS PANEL STYLES */
+
+.long-links-panel {
+  background-color: white;
+  border: black solid 4px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+/* QUICK LINKS STYLES */
+
+.link-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+}
+
+.link-buttons .button {
+  background-color: #036A41;
+  color: white;
+  border: black solid 4px;
+  border-radius: 10px;
+  margin: .5rem;
+  padding: 5px;
+  transition-duration: 0.4s;
+}
+
+.link-buttons .button:hover {
+  background-color: #F4F4F3;
+  color: #036A41;
+  border-radius: 5px;
+}
+
+/* CONTACT US STYLES */
+
+.contact-us {
+  text-align: center;
+}
+
+.contact-info address a  {
+  color: #036A41;
+  text-decoration: none;
+  transition-duration: 0.4s;
+}
+
+.contact-info address a:hover  {
+  text-decoration: underline;
+}
+
+@media (max-width: 992px) {
+  .form-manager {
+    margin: 0 2rem;
+  }
+}

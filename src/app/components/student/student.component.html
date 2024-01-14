@@ -1,0 +1,53 @@
+<div class="student-page">
+  <main class="student-content">
+    <div class="student-form-header">
+      <h1 class="text-center welcome">Welcome back, Student!</h1>
+      <div class="form-nav">
+        <app-navigation></app-navigation>
+      </div>
+    </div>
+    <section class="student-instructions">
+      <p>Welcome to the student dashboard. <br> Here you can view the different forms required to sign
+        up for a specific STEC research course. The navigation buttons above will allow you to view
+        different forms below as well as filling them out and sending them to the STEC coordinator.
+        If you wish to close a form, click on the 'Close Form' button above.
+        Additional material is found towards the bottom of the page.
+      </p>
+    </section>
+    <section class="form-viewer">
+      <router-outlet></router-outlet>
+    </section>
+  </main>
+  <div class="long-links-panel">
+
+    <section class="quick-links">
+      <h2 class="text-center">Quick Links</h2>
+      <div class="link-buttons">
+        <button class="button" routerLink='/faq'>FAQs</button>
+        <button class="button" routerLink='/enrollment'>Enrollment Instructions</button>
+        <button class="button" routerLink='/class-requirements'>Class Requirements</button>
+        <button class="button"
+          onclick="window.open('https://www.ggc.edu/academics/school-of-science-and-technology/research-internships-service-learning/stec-2500-4500/')">STEC
+          Resources</button>
+        <button class="button" onclick="window.open('https://www.ggc.edu/academics/calendar/')">Academic
+          Calendar</button>
+        <button class="button" routerLink="/previous-projects">Previous Projects</button>
+        <button class="button" onclick="window.open('https://www.ggc.edu/academics/catalog/')">GGC Catalog</button>
+      </div>
+    </section>
+
+    <section class="contact-us">
+      <div class="contact-info">
+        <h2 class="text-center">Contact Us</h2>
+        <address>
+          <p><i class="bi bi-envelope-fill"></i>&nbsp;Email: <a
+              href="mailto:STECcoordinator@ggc.edu">STECcoordinator@ggc.edu</a></p>
+          <p><i class="bi bi-telephone-fill"></i>&nbsp;Phone: <a href="tel:470-955-8765">470-955-8765</a></p>
+          <p><i class="bi bi-geo-alt-fill"></i>&nbsp;Location: Building C, Suite 2233</p>
+        </address>
+      </div>
+    </section>
+
+  </div>
+</div>
+<app-feedback-button></app-feedback-button>

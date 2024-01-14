@@ -1,0 +1,262 @@
+<div class="faculty-page">
+  <main class="faculty-content">
+    <div class="faculty-header">
+      <h1 class="text-center">Faculty Dashboard</h1>
+    </div>
+    <section class="faculty-instructions">
+      <p>Welcome to the faculty dashboard.</p>
+    </section>
+
+    <div class="form-finder">
+
+      <div class="form-search-bar input-group">
+        <span class="input-group-text"><i class="bi bi-search"></i></span>
+        <input #searchbar name="keySearch" class="form-control" (keyup)="handleKeyUp($event)" [(ngModel)]="keySearch" placeholder="Enter form key">
+      </div>
+
+      <section class="form-results">
+        <div *ngIf="(forms$ | async)?.length! > 0;else noForms">
+          <ul *ngFor="let form of (forms$ | async)" class="collection">
+            <li class="collection-item" style="list-style: none">
+              <strong>Form:</strong> {{form.formNumber}}&nbsp;&nbsp;&nbsp;
+              <strong>Name:</strong> {{form.studentName}}&nbsp;&nbsp;&nbsp;
+              <strong>Semester:</strong> {{form.semester}}&nbsp;&nbsp;&nbsp;
+              <strong>Primary Advisor:</strong> {{form.primaryAdvisor}}
+              <a class="secondary-content">
+                <!-- <i (click)="editForm($event, form)" class="bi-pencil-fill" style="font-size: 0.9em;"></i> -->
+                <!-- <i *ngIf="editState && formToEdit!.id == form.id" (click)="clearState()" class="bi-arrows-angle-contract" style="font-size: 0.9em;"></i> -->
+              </a>
+              <!-- <div class="forms" *ngIf="editState && formToEdit!.id == form.id"> -->
+              <div class="forms">
+                <form class="show-form" (ngSubmit)="updateForm(form)">
+                  <div class="form-group">
+                    <p>
+                      <label for="studentName"><b> Student Researcher Name:</b> </label>
+                      <input type="text" rows="1" cols="40" name="studentName" class="form-control"
+                        [(ngModel)]="form.studentName" disabled />
+                    </p>
+                  </div>
+
+                  <div class="form-row">
+                    <div class="col">
+                      <label for="studentId"><b>Student ID #:</b></label>
+                      <input name="studentId" class="form-control" [(ngModel)]="form.studentId" disabled />
+                    </div>
+                    <div class="col">
+                      <label for="studentEmail"><b> Student email:</b></label>
+                      <input name="studentEmail" class="form-control" [(ngModel)]="form.studentEmail" disabled />
+                    </div>
+                  </div>
+
+                  <p>
+                    <label for="primaryAdvisor"><b>Primary Faculty Research Advisor:</b></label>
+                    <input rows="1" cols="40" name="primaryAdvisor" class="form-control"
+                      [(ngModel)]="form.primaryAdvisor" disabled />
+                  </p>
+
+                  <p>
+                    <label for="primaryAdvisorEmail"><b>Primary Faculty Research Advisor Email:</b></label>
+                    <input rows="1" cols="40" name="primaryAdvisorEmail" class="form-control"
+                      [(ngModel)]="form.primaryAdvisorEmail" disabled />
+                  </p>
+
+                  <p>
+                    <b> Additional Faculty Research Advisor Names:</b>
+                  </p>
+                  <div class="form-group">
+                    <ol>
+                      <li><input name="addAdvisorOne" class="form-control" [(ngModel)]="form.addAdvisorOne" disabled />
+                      </li>
+                      <li>
+                        <input rows="1" cols="92" name="addAdvisorTwo" class="form-control"
+                          [(ngModel)]="form.addAdvisorTwo" disabled />
+                      </li>
+                      <li>
+                        <input rows="1" cols="92" name="addAdvisorThree" class="form-control"
+                          [(ngModel)]="form.addAdvisorThree" disabled />
+                      </li>
+                      <li>
+                        <input rows="1" cols="92" name="addAdvisorFour" class="form-control"
+                          [(ngModel)]="form.addAdvisorFour" disabled />
+                      </li>
+                    </ol>
+                  </div>
+                  <div class="form-group">
+                    <label for="researchProjectTitle"><b> Research Project Title:</b></label>
+                    <input class="form-control" name="researchProjectTitle" [(ngModel)]="form.researchProjectTitle"
+                      disabled />
+                  </div>
+                  <div class="form-group">
+                    <label for="researchProjectDescription">
+                      <b> Research Project Description:</b>
+                    </label>
+                    <textarea class="form-control" name="researchProjectDescription"
+                      [(ngModel)]="form.researchProjectDescription" disabled></textarea>
+                  </div>
+                  <div class="form-group">
+                    <label for="researchProjectObjective">
+                      <b> Research Project Objectives:</b>
+                    </label>
+
+                    <textarea class="form-control" name="researchProjectObjective"
+                      [(ngModel)]="form.researchProjectObjective" disabled>
+                                </textarea>
+                  </div>
+                  <div class="form-group">
+                    <p>
+                      <b>
+                        Additional Information
+                      </b>
+                    </p>
+
+                    <ol>
+                      <ng-container *ngIf="form.formNumber != '2500'">
+                        <li>
+                          The research student's Area F requriements been met.
+                          <input class="form-check-input" type="radio" name="areaF" value="yes" [checked]="true"
+                            [(ngModel)]="form.areaF" disabled /> Yes
+                          <input class="form-check-input" type="radio" name="areaF" value="no" [checked]="true"
+                            [(ngModel)]="form.areaF" disabled /> No
+                          <textarea *ngIf="form.areaF == 'no'" class="form-control" name="areaF_reason"
+                            [(ngModel)]="form.areaF_reason" required disabled>
+                                            </textarea>
+                          (If not, you cannot enroll in STEC{{form.formNumber}} without additional approval.)
+                        </li>
+                        <br />
+                      </ng-container>
+
+                      <li>
+                        Indicate the number of credit hours for which the student is already
+                        registered, not including STEC{{form.formNumber}}:
+                        <input class="col-xs-1" name="numCreditHours" [(ngModel)]="form.numCreditHours" disabled />
+                      </li>
+                      <br />
+
+                      <li>
+                        The student and the faculty advisor understand that if an incomplete
+                        is awarded, the ncomplete will automatically be converted to an F if a
+                        grade change form is not processed by the end of the next semester,
+                        including summer semester.
+                        <input class="form-check-input" type="radio" name="test1" value="yes" [checked]="true"
+                          [(ngModel)]="form.test1" disabled /> Yes
+                        <input class="form-check-input" type="radio" name="test1" value="no" [checked]="true"
+                          [(ngModel)]="form.test1" disabled /> No
+                      </li>
+                      <br />
+
+                      <li>
+                        The STEC{{form.formNumber}} project may be, but is not required to continue, for a
+                        second semester of credit if both the student and the faculty advisor
+                        are in agreement to add to the project. The continuation of the effort
+                        is not equivalent to an incomplete, but is intended to expand the
+                        investigation from the previous results.
+                        <input class="form-check-input" type="radio" name="test2" value="yes" [checked]="true"
+                          [(ngModel)]="form.test2" disabled /> Yes
+                        <input class="form-check-input" type="radio" name="test2" value="no" [checked]="true"
+                          [(ngModel)]="form.test2" disabled /> No
+                      </li>
+                      <br />
+                      <ng-container *ngIf="form.formNumber != '2500'">
+                        <li>
+                          Is this course required to be compleeted this semester in order for
+                          the student to completed his/her graduation requirements?
+                          <input class="form-check-input" type="radio" name="test3" value="yes" [checked]="true"
+                            [(ngModel)]="form.test3" disabled /> Yes
+                          <input class="form-check-input" type="radio" name="test3" value="no" [checked]="true"
+                            [(ngModel)]="form.test3" disabled /> No
+                        </li>
+                        <br />
+                      </ng-container>
+                    </ol>
+                    <div class="form-group row">
+                      <div class="col">
+                        <label for="studentSignature">
+                          <b> Student Researcher </b>
+                        </label>
+                        <input class="form-control" name="studentSignature" [(ngModel)]=form.studentSignature
+                          disabled />
+                        <label for="studentDate">Date:</label>
+                        <input class="form-control" name="studentDateSigned" [(ngModel)]="form.studentDateSigned"
+                          disabled>
+                      </div>
+                      <div class="col">
+                        <label for="advisorSignature">
+                          <b>Faculty Research Advisor</b>
+                        </label>
+                        <input class="form-control" name="facultySignature" [(ngModel)]="form.facultySignature"
+                          required />
+                        <label for="advisortDate">Date:</label>
+                        <input class="form-control" name="facultyDateSigned" [(ngModel)]="form.facultyDateSigned"
+                          required />
+                      </div>
+                    </div>
+                  </div>
+                  <br>
+                  <!-- <ng-container class="approved" *ngIf="form.approved">
+                              <button (click)="unapproveForm($event, form)" type="button" class="form-button">Unapprove</button>
+                              <button (click)="deleteForm($event, form)" type="button" class="form-button">Delete</button>
+                            </ng-container>
+                            <ng-container class="not-approved" *ngIf="!form.approved && !form.denied">
+                              <button (click)="approveForm($event, form)" type="button" class="form-button">Approve</button>
+                              <button (click)="deniedForm($event, form)" type="button" class="form-button">Deny</button>
+                              <button (click)="copyKey($event, form)" type="button" class="form-button">Copy Key</button>
+                            </ng-container>
+                            <ng-container class="denied" *ngIf="form.denied">
+                              <button (click)="approveForm($event, form)" type="button" class="form-button">Approve</button>
+                              <button (click)="deleteForm($event, form)" type="button" class="form-button">Delete</button>
+                            </ng-container> -->
+                  <button type="submit" class="form-button">Submit</button>
+                </form>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- </ng-container> -->
+      <ng-template #noForms>
+        <h5>No Forms Found</h5>
+      </ng-template>
+    </div>
+
+  </main>
+  <div class="long-links-panel">
+
+    <section class="quick-links">
+      <h2 class="text-center">Quick Links</h2>
+      <div class="link-buttons">
+        <button class="button" routerLink='/faq'>FAQs</button>
+        <button class="button" routerLink='/enrollment'>Enrollment Instructions</button>
+        <button class="button" routerLink='/class-requirements'>Class Requirements</button>
+        <button class="button"
+          onclick="window.open('https://www.ggc.edu/academics/school-of-science-and-technology/research-internships-service-learning/stec-2500-4500/')">STEC
+          Resources</button>
+        <button class="button" onclick="window.open('https://www.ggc.edu/academics/calendar/')">Academic
+          Calendar</button>
+        <button class="button" routerLink="/previous-projects">Previous Projects</button>
+        <button class="button" onclick="window.open('https://www.ggc.edu/academics/catalog/')">GGC Catalog</button>
+      </div>
+    </section>
+
+    <section class="contact-us">
+      <div class="contact-info">
+        <h2 class="text-center">Contact Us</h2>
+        <address>
+          <p><i class="bi bi-envelope-fill"></i>&nbsp;Email: <a
+              href="mailto:STECcoordinator@ggc.edu">STECcoordinator@ggc.edu</a></p>
+          <p><i class="bi bi-telephone-fill"></i>&nbsp;Phone: <a href="tel:470-955-8765">470-955-8765</a></p>
+          <p><i class="bi bi-geo-alt-fill"></i>&nbsp;Location: Building C, Suite 2233</p>
+        </address>
+      </div>
+    </section>
+
+  </div>
+</div>
+<!-- Optional JavaScript -->
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+  integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+  integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+  integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>

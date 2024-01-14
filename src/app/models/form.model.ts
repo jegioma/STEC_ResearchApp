@@ -1,0 +1,31 @@
+export interface Form {
+    addAdvisorFour: string;
+    addAdvisorOne: string;
+    addAdvisorThree: string;
+    addAdvisorTwo: string;
+    approved: boolean;
+    areaF: string;
+    areaF_reason?: string;
+    denied: boolean;
+    facultyDateSigned?: string;
+    facultySignature?: string;
+    formNumber: string;
+    numCreditHours: string;
+    primaryAdvisor: string;
+    primaryAdvisorEmail: string;
+    researchProjectDescription: string;
+    researchProjectObjective: string;
+    researchProjectTitle: string;
+    semester: string;
+    studentDateSigned: string;
+    studentEmail: string;
+    studentId: string;
+    studentName: string;
+    studentSignature: string;
+    submitted: boolean;
+    test1: string;
+    test2: string;
+    test3: string;
+    time: Date;
+    id?: string;
+}

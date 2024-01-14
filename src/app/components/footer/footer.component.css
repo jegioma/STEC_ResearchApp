@@ -1,0 +1,40 @@
+/* FOOTER STYLES */
+
+.full-footer {
+  background-color: white;
+  color: lightgray;
+  line-height: 1.5;
+}
+
+.footer-links {
+  padding: 30px;
+}
+
+.link-items {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.link-items a {
+  color: #036A41;
+  text-decoration: none;
+  padding: 0px 10px;
+  transition-duration: 0.4s;
+}
+
+.link-items a:hover {
+  text-decoration: underline;
+}
+
+.footer-legal {
+  background-color: #333;
+  display: flex;
+  justify-content: center;
+  padding: 25px;
+}
+
+@media (max-width: 769px) {}
+
+@media (max-width: 992px) {}

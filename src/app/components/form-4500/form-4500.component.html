@@ -1,0 +1,169 @@
+<div class="container" [hidden]="submitted">
+  <div class="container">
+    <h3>STEC 4500 Faculty – Student Research Agreement</h3>
+    <p><b> (One form should be completed per student researcher)</b></p>
+  </div>
+  <form #form="ngForm" (ngSubmit)="submit(form)">
+    <div class="form-group">
+      <label for="semester"><b class="required-text">Semester</b></label>
+      <select class="form-control form-control-lg" id="semester" name="semester" ngModel required>
+        <option *ngFor="let sem of semesters" [value]="sem">
+          {{ sem }}
+        </option>
+      </select>
+      <pre></pre>
+    </div>
+
+    <div class="form-group">
+      <p>
+        <label for="studentName"><b class="required-text"> Student Researcher Name:</b> </label>
+        <input type="text" rows="1" cols="40" name="studentName" class="form-control" ngModel required />
+      </p>
+    </div>
+
+    <div class="form-row">
+      <div class="col">
+        <label for="studentId"><b class="required-text">Student ID #:</b></label>
+        <input name="studentId" class="form-control" ngModel required />
+      </div>
+      <div class="col">
+        <label for="studentEmail"><b class="required-text"> Student email:</b></label>
+        <input name="studentEmail" class="form-control" ngModel required />
+      </div>
+    </div>
+
+    <p>
+      <label for="primaryAdvisor"><b class="required-text">Primary Faculty Research Advisor:</b></label>
+      <input rows="1" cols="40" name="primaryAdvisor" class="form-control" ngModel required />
+      <i>Case-sensitive and spell name as listed in <a href="https://www.ggc.edu/about-ggc/directory/" target="_blank"
+          rel="noopener noreferrer">GGC directory</a> without prefix</i><br>
+    </p>
+
+    <p>
+      <label for="primaryAdvisorEmail"><b class="required-text">Primary Faculty Research Advisor Email:</b></label>
+      <input rows="1" cols="40" name="primaryAdvisorEmail" class="form-control" ngModel required />
+    </p>
+
+    <p>
+      <b> Additional Faculty Research Advisor Names:</b> Please list all
+      participating mentors for the project – this is for office use.
+    </p>
+    <div class="form-group">
+      <ol>
+        <li><input name="addAdvisorOne" class="form-control" ngModel /></li>
+        <li>
+          <input rows="1" cols="92" name="addAdvisorTwo" class="form-control" ngModel />
+        </li>
+        <li>
+          <input rows="1" cols="92" name="addAdvisorThree" class="form-control" ngModel />
+        </li>
+        <li>
+          <input rows="1" cols="92" name="addAdvisorFour" class="form-control" ngModel />
+        </li>
+      </ol>
+    </div>
+    <div class="form-group">
+      <label for="researchProjectTitle"><b class="required-text"> Research Project Title:</b></label>
+      <input class="form-control" name="researchProjectTitle" ngModel required />
+    </div>
+    <div class="form-group">
+      <label for="researchProjectDescription"><b class="required-text"> Research Project Description:</b></label>
+      <textarea class="form-control" name="researchProjectDescription" ngModel required></textarea>
+    </div>
+    <div class="form-group">
+      <label for="researchProjectObjective">
+        <b class="required-text"> Research Project Objectives:</b>
+      </label>
+
+      <textarea class="form-control" name="researchProjectObjective" ngModel required>
+      </textarea>
+    </div>
+    <div class="form-group">
+      <p>
+        <b>
+          Additional Information - Please mark your response to acknowledge
+          understanding of the requirements.</b>
+      </p>
+
+      <ol>
+        <li class="required-text">
+          The research student's Area F requriements been met.
+          <input class="form-check-input" type="radio" name="areaF" value="yes" [checked]="true" (click)="hideAreaF()"
+            ngModel required /> Yes
+          <input class="form-check-input" type="radio" name="areaF" value="no" [checked]="true" (click)="showAreaF()"
+            ngModel /> No
+        </li>
+        <textarea *ngIf="areaFTextArea" class="form-control" name="areaF_reason" ngModel required>
+        </textarea>
+        (If not, you cannot enroll in STEC4500 without additional approval.)
+        <br>
+
+        <li class="required-text">
+          Indicate the number of credit hours for which the student is already
+          registered, not including STEC4500:
+          <input class="col-xs-1" name="numCreditHours" ngModel required />
+
+          (The student cannot be registered for more than 16 hours in order for
+          this request to be processed.)
+        </li>
+        <br />
+
+        <li class="required-text">
+          The student and the faculty advisor understand that if an incomplete
+          is awarded, the incomplete will automatically be converted to an F if a
+          grade change form is not processed by the end of the next semester,
+          including summer semester.
+          <input class="form-check-input" type="radio" name="test1" value="yes" [checked]="true" ngModel required /> Yes
+          <input class="form-check-input" type="radio" name="test1" value="no" [checked]="true" ngModel /> No
+        </li>
+        <br />
+
+        <li class="required-text">
+          The STEC4500 project may be, but is not required to continue, for a
+          second semester of credit if both the student and the faculty advisor
+          are in agreement to add to the project. The continuation of the effort
+          is not equivalent to an incomplete, but is intended to expand the
+          investigation from the previous results.
+          <input class="form-check-input" type="radio" name="test2" value="yes" [checked]="true" ngModel required /> Yes
+          <input class="form-check-input" type="radio" name="test2" value="no" [checked]="true" ngModel /> No
+        </li>
+        <br />
+
+        <li class="required-text">
+          Is this course required to be completed this semester in order for
+          the student to completed his/her graduation requirements?
+          <input class="form-check-input" type="radio" name="test3" value="yes" [checked]="true" ngModel required /> Yes
+          <input class="form-check-input" type="radio" name="test3" value="no" [checked]="true" ngModel /> No
+        </li>
+        <br />
+      </ol>
+      <b class="required-text">Signatures:</b> The student and the primary faculty research advisor
+      must BOTH sign this form, then submit electronically to STECcoordinator
+      for processing and registration.
+      <pre></pre>
+      <div class="form-group row">
+        <div class="col">
+          <label for="studentSignature">
+            <b> Student Researcher </b>
+          </label>
+          <input class="form-control" name="studentSignature" ngModel required />
+          <label for="studentDate">Date:</label>
+          <input class="form-control" name="studentDateSigned" [(ngModel)]="currentDate" ngModel required />
+        </div>
+        <div class="col">
+          <label for="advisorSignature">
+            <b>Faculty Research Advisor</b>
+          </label>
+          <input class="form-control" disabled />
+          <label for="advisortDate">Date:</label>
+          <input class="form-control" disabled />
+        </div>
+      </div>
+    </div>
+
+    <button type="submit" class="submitbtn" [disabled]="form.invalid">Submit</button>
+  </form>
+</div>
+<div class="container" [hidden]="!submitted">
+  <h2>Thank you for applying to STEC 4500! Your form has been submitted</h2>
+</div>

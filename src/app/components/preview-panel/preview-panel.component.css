@@ -1,0 +1,100 @@
+/* SEARCH STYLES */
+
+.filter-nav {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.form-select {
+  background-color: #F4F4F3;
+  color: #036A41;
+  border: black solid 4px;
+  width: 20rem;
+}
+
+/* NOTIFICATION PANEL STYLES */
+
+.preview-panel-style {
+  border: 5px #036A41 solid;
+  background-color: #F4F4F3;
+  height: auto;
+  border-radius: 10px;
+  width: 90%;
+  margin-top: 30px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 20px;
+  cursor: pointer;
+}
+
+.status-label {
+  background-color: #036A41;
+  color: white;
+  border: black solid 1px;
+  width: 100%;
+  margin-left: 80%;
+  margin-bottom: 30px;
+  font-size: 1.5em;
+  padding: 5px;
+  margin-bottom: 10px;
+}
+
+/* STUDENT FORMS STYLES */
+
+.forms {
+  width: 90%;
+  height: 80%;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 5%;
+}
+
+.form-button {
+  background-color: #036A41;
+  color: white;
+  font-size: 0.8em;
+  border-radius: 10px;
+  cursor: pointer;
+  padding: 10px;
+}
+
+button:hover {
+  opacity: 0.9;
+}
+
+.show-form {
+  background-color: #F4F4F3;
+  border: black solid 5px;
+  padding-bottom: 10px;
+  padding: 10px;
+  border-radius: 10px;
+  font-size: 1em;
+}
+
+ul {
+  display: block;
+  border: 1px solid rgba(0, 0, 0, 0.175);
+  padding: 5px;
+  width: 100%;
+}
+
+/* ICON STYLES */
+
+.bi-pencil-fill {
+  color: black;
+  float: right;
+}
+
+.bi-x-square-fill {
+  color: black;
+  float: right;
+  margin-right: .2rem;
+}
+
+.bi-caret-up-fill {
+  color: black;
+}
+
+.bi-caret-down-fill {
+  color: black;
+}

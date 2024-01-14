@@ -1,0 +1,32 @@
+<div class="login-page">
+  <main class="login-content">
+    <div class="login-panel" *ngIf="!isSignedIn">
+      <h1 class="text-center mb-3">Log In</h1>
+      <form class="mb-5">
+        <label for="validateCustomFirstName" class="form-label">Username</label>
+        <div class="input-group mb-2">
+          <span class="input-group-text"><i class="bi bi-person"></i></span>
+          <input type="text" #email class="form-control" id="validateCustomFirstName" placeholder="Type your username"
+            required />
+          <div class="valid-feedback">Looks good!</div>
+        </div>
+        <label for="validateEmail" class="form-label">Password</label>
+        <div class="input-group mb-5">
+          <span class="input-group-text"><i class="bi bi-lock"></i></span>
+          <input type="password" #password class="form-control" id="validateEmail" placeholder="Type your password"
+            required />
+          <div class="valid-feedback">Looks good!</div>
+        </div>
+        <div class="submit-login">
+          <button type="submit" class="login-button login"
+            (click)="onSignin(email.value, password.value)">Login</button>
+        </div>
+      </form>
+      <div class="login-button-nav">
+        <button type="submit" class="login-button" (click)="backClick()">Back</button>
+        <button type="submit" class="login-button" (click)="registerClick()">Register</button>
+      </div>
+    </div>
+  </main>
+</div>
+<app-feedback-button></app-feedback-button>

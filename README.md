@@ -48,7 +48,7 @@ For our Software Development II project, we have chosen to work on the Research 
 
 <br>
 
-[Repository Location](https://github.com/GGC-SD/STEC4500-ResearchApp) :computer:
+[Repository Location](https://github.com/jegioma/STEC_ResearchApp) :computer:
 
 [Progress Tracking Tool](https://www.atlassian.com/software/jira) :bookmark_tabs:
 
